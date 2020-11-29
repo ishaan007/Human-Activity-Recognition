@@ -1,0 +1,658 @@
+<!doctype html>
+<html><head><title>Viaduct - Take home challenge</title><meta charset="UTF-8"><link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,400italic,700,700italic|Roboto:400,700,700italic,400italic" rel="stylesheet" type="text/css"><style>/*
+ * Copyright 2014 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    font-size: 15px;
+    color: #333;
+    background: white;
+    padding: 60px 95px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern";
+    font-kerning: normal;
+    -moz-font-feature-settings: "kern";
+    -webkit-font-feature-settings: "kern";
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+th {
+    font-family: Roboto, sans-serif;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 1.25em;
+    margin-bottom: 0.75em;
+}
+
+h1 {
+    font-size: 35px;
+    line-height: 42px;
+}
+
+h1:first-child {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 18px;
+    line-height: 22px;
+}
+
+h3 {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.capitalize-h3 h3 {
+    text-transform: uppercase;
+}
+
+/* Body text */
+body,
+p,
+ul,
+ol,
+td {
+    font-family: "Crimson Text", serif;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+blockquote,
+q {
+    display: block;
+    margin: 1em 0;
+    font-style: italic;
+}
+
+blockquote a,
+q a {
+    text-decoration: underline;
+}
+
+blockquote {
+    padding-left: 10px;
+    border-left: 4px solid #a6a6a6;
+}
+
+q {
+    color: #a6a6a6;
+    line-height: 40px;
+    font-size: 24px;
+    text-align: center;
+    quotes: none;
+}
+
+q a {
+    color: #a6a6a6;
+}
+
+code,
+pre {
+    font-family: Consolas, "Liberation Mono", Menlo, "Courier Prime Web",
+        Courier, monospace;
+    background: #f2f2f2;
+}
+
+code {
+    padding: 1px;
+    margin: 0 -1px;
+    border-radius: 3px;
+}
+
+pre {
+    display: block;
+    line-height: 20px;
+    text-shadow: 0 1px white;
+    padding: 5px 5px 5px 30px;
+    white-space: nowrap;
+    position: relative;
+    margin: 1em 0;
+}
+
+pre:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    border-left: solid 1px #dadada;
+}
+
+/* Text Alignment */
+.line {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: end;
+}
+
+/* Lists */
+div[data-section-style="5"],
+div[data-section-style="6"],
+div[data-section-style="7"] {
+    margin: 12px 0;
+}
+
+ul {
+    padding: 0 0 0 40px;
+}
+
+ul li {
+    margin-bottom: 0.4em;
+}
+
+/* Bulleted list */
+div[data-section-style="5"] ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul {
+    list-style-type: square;
+}
+div[data-section-style="5"] ul ul ul ul {
+    list-style-type: disc;
+}
+div[data-section-style="5"] ul ul ul ul ul {
+    list-style-type: circle;
+}
+div[data-section-style="5"] ul ul ul ul ul ul {
+    list-style-type: square;
+}
+
+/* Numbered list */
+div[data-section-style="6"] ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul {
+    list-style-type: lower-roman;
+}
+div[data-section-style="6"] ul ul ul ul {
+    list-style-type: decimal;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    list-style-type: lower-alpha;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    list-style-type: lower-roman;
+}
+
+/* Checklist */
+div[data-section-style="7"] ul {
+    list-style-type: none;
+}
+
+div[data-section-style="7"] ul li:before {
+    content: "\2610";
+    position: absolute;
+    display: inline;
+    margin-right: 1.2em;
+    margin-left: -1.2em;
+}
+
+div[data-section-style="7"] ul li.parent:before {
+    content: "";
+}
+
+div[data-section-style="7"] ul li.checked {
+    text-decoration: line-through;
+}
+
+div[data-section-style="7"] ul li.checked:before {
+    content: "\2611";
+    text-decoration: none;
+}
+
+/* Tables */
+div[data-section-style="8"] {
+    margin: 12px 0;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border: solid 1px #bbb;
+    table-layout: fixed;
+    position: relative;
+}
+
+table th,
+table td {
+    padding: 2px 2px 0;
+    min-width: 1.5em;
+    word-wrap: break-word;
+}
+
+table th {
+    border-bottom: 1px solid #c7cbd1;
+    background: #f2f2f2;
+    font-weight: bold;
+    vertical-align: bottom;
+    color: #3a4449;
+    text-align: center;
+}
+
+table td {
+    padding-top: 0;
+    border-left: 1px solid #c7cbd1;
+    border-top: 1px solid #c7cbd1;
+    vertical-align: top;
+}
+
+table td.bold {
+    font-weight: bold;
+}
+
+table td.italic {
+    font-style: italic;
+}
+
+table td.underline {
+    text-decoration: underline;
+}
+
+table td.strikethrough {
+    text-decoration: line-through;
+}
+
+table td.underline.strikethrough {
+    text-decoration: underline line-through;
+}
+
+table td:first-child {
+    border-left: hidden;
+}
+
+table tr:first-child td {
+    border-top: hidden;
+}
+
+/* Images */
+div[data-section-style="11"] {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div[data-section-style="11"][data-section-float="0"] {
+    clear: both;
+    text-align: center;
+}
+
+div[data-section-style="11"][data-section-float="1"] {
+    float: left;
+    clear: left;
+    margin-right: 20px;
+}
+
+div[data-section-style="11"][data-section-float="2"] {
+    float: right;
+    clear: right;
+    margin-left: 20px;
+}
+
+div[data-section-style="11"] img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
+div[data-section-style="11"].show-border {
+    outline: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+hr {
+    width: 70px;
+    margin: 20px auto;
+}
+
+/* Apps */
+div[data-section-style="19"].placeholder {
+    margin: 0.8em auto;
+    padding: 4px 0;
+    display: block;
+    color: #3d87f5;
+    text-align: center;
+    border: 1px solid rgba(41, 182, 242, 0.2);
+    border-radius: 3px;
+    background: #e9f8fe;
+    font-family: Roboto, sans-serif;
+}
+
+div[data-section-style="19"].first-party-element {
+    margin-bottom: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+div[data-section-style="19"].first-party-element.kanban {
+    background-image: url("https://quip-cdn.com/nK0hSyhsb4jrLIL2s5Ma-g");
+    height: 166px;
+}
+
+div[data-section-style="19"].first-party-element.calendar {
+    background-image: url("https://quip-cdn.com/OYujqLny03RILxcLIiyERg");
+    height: 244px;
+}
+
+div[data-section-style="19"].first-party-element.poll {
+    background-image: url("https://quip-cdn.com/fbIiFrcKGv__4NB7CBfxoA");
+    height: 116px;
+}
+
+div[data-section-style="19"].first-party-element.countdown {
+    background-image: url("https://quip-cdn.com/3bPhykD2dBei9sSjCWteTQ");
+    height: 96px;
+}
+
+div[data-section-style="19"].first-party-element.process_bar {
+    background-image: url("https://quip-cdn.com/ybQlHnHEIIBLog5rZmYs_w");
+    height: 36px;
+}
+
+div[data-section-style="19"].first-party-element.project_tracker {
+    background-image: url("https://quip-cdn.com/OFQU087b4Mxzz1ZaHwtjXA");
+    height: 164px;
+}
+
+div[data-section-style="19"] img {
+    margin: 0.5em;
+}
+
+div[data-section-style="19"] img.masked-image {
+    margin: 0;
+    transform-origin: top left;
+}
+
+div[data-section-style="19"] .image-mask {
+    position: relative;
+    overflow: hidden;
+}
+/*
+ * Copyright 2019 Quip
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may
+ * not use this file except in compliance with the License. You may obtain
+ * a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ */
+
+body {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+
+/* Numbered list */
+div[data-section-style="6"] {
+    counter-reset: indent0 indent1 indent2 indent3 indent4 indent5 indent6
+        indent7 indent8;
+}
+div[data-section-style="6"].list-numbering-continue {
+    counter-reset: none;
+}
+div[data-section-style="6"].list-numbering-restart-at {
+    counter-reset: indent0 var(--indent0) indent1 indent2 indent3 indent4
+        indent5 indent6 indent7 indent8;
+}
+div[data-section-style="6"] ul {
+    /* indent0 is not reset since it is shared across the div elements */
+    list-style-type: none !important;
+}
+div[data-section-style="6"] ul ul {
+    counter-reset: indent1;
+}
+div[data-section-style="6"] ul ul ul {
+    counter-reset: indent2;
+}
+div[data-section-style="6"] ul ul ul ul {
+    counter-reset: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul {
+    counter-reset: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul {
+    counter-reset: indent5;
+}
+div[data-section-style="6"] ul li {
+    counter-increment: indent0;
+}
+div[data-section-style="6"] ul ul li {
+    counter-increment: indent1;
+}
+div[data-section-style="6"] ul ul ul li {
+    counter-increment: indent2;
+}
+div[data-section-style="6"] ul ul ul ul li {
+    counter-increment: indent3;
+}
+div[data-section-style="6"] ul ul ul ul ul li {
+    counter-increment: indent4;
+}
+div[data-section-style="6"] ul ul ul ul ul ul li {
+    counter-increment: indent5;
+}
+div[data-section-style="6"] ul li:before {
+    content: counter(indent0, decimal) ". ";
+}
+div[data-section-style="6"] ul ul li:before {
+    content: counter(indent1, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul li:before {
+    content: counter(indent2, lower-roman) ". ";
+}
+div[data-section-style="6"] ul ul ul ul li:before {
+    content: counter(indent3, decimal) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul li:before {
+    content: counter(indent4, lower-alpha) ". ";
+}
+div[data-section-style="6"] ul ul ul ul ul ul li:before {
+    content: counter(indent5, lower-roman) ". ";
+}
+</style></head><body><h1 id='DKTACAXlBZW'>Viaduct - Take home challenge</h1>
+
+<h2 id='DKTACAxOK13'>Description (slack/email post) :</h2>
+
+The problem statement asks to identify users based on accelerometer data from walking activity. My approach treats this as a classification problem and splits the raw data for each user into small non-overlapping windows of time and extracts meaningful semantic  features from these windows. All the decisions starting from gaining intuition about the type of data to reasons for including certain features and post processing steps to reduce overfitting are included in my writeup.<br/>
+
+<br/>
+
+<h2 id='DKTACAjXoIH'><b>Understanding the data</b></h2>
+
+x,y,z components of WALKING acceleration for 22 users<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/ZvY7x3q6k8Q8KjLRAtZZgQ?a=UljZBRQN45MahXw4Mtf2MjofXhXMROxkGXv16dTeQcMa' id='DKTACAk3H9H' alt=''></img></div><br/>
+
+<b>Number of data points for each user</b><br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/C_2g5EURIPF0aEFkV_q_HQ?a=KzPnT2nNALX68QdBw9Izs5bl1iweRlPjUIKTWwMCZJMa' id='DKTACADvsnV' alt=''></img></div><br/>
+
+From the graphs below I  get an intuition of how data looks like. Instead of visualizing x,y and z components of acceleration independently - I add additional column of  magnitude (L2 norm of x, y and z) and visualize that for different users<br/>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/NwivmX-IGJoBsnS9HaS3pw?a=wAALdh3ldKUTbGM6WbrsUfwmeBxPLsQaFnioSSQezJ4a' id='DKTACAhpadz' alt=''></img></div><br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/h-MtcYUA5W8ihnJH8Rm2Pw?a=Fjm2UKEa1sz8ybYjacm94vzjctF5JD3zXP2JctbQMxYa' id='DKTACAE1wfI' alt=''></img></div><br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/7ZULAG5RxWAyHAqEA8gzug?a=6EcTonft8TGMfHAKjm0lEX3kABQ39eXZWiMsMyeU1dYa' id='DKTACA6Dp1U' alt=''></img></div><br/>
+
+<b>Important observations:</b><br/>
+
+<div class="" style="" data-section-style='6'><ul id='DKTACA2SNoX'><li id='DKTACAmQk11' class='' value='1'>There is a cyclicality with each of the components and <b>walking is a cyclic activity too (acceleration is high when one foot is in the air and acceleration is low when both feet are at rest)</b> , the same cycle repeats after every step
+
+<br/></li><li id='DKTACAzgabh' class=''>We will have to bootstrap to create a dataset. 
+
+<br/></li><li id='DKTACAuvXBX' class='parent'><b>How do we bootstrap ?</b>
+
+<br/></li><ul><li id='DKTACACsGBq' class='parent'>Choice 1: Bootstrap a fraction of each signal, multiple times. Sort them by time and extract features. Something like below 
+
+<br/></li><ul><li id='DKTACAoNcJz' class=''><b>Bootstraped Signal</b>
+
+<br/></li><li id='DKTACAwXsdf' class=''><span data-section-style='11' style='max-width:77%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/wWGBQpdjDhKlZ6UN2msgjQ?a=wpLJZLuDBI6qmvQccWqu4F7FFhRM6AeWae1ypwqMm0Ma' id='DKTACAwXsdf' alt='' width='619' height='398'></img></span></li><li id='DKTACABf3hv' class=''>
+
+<br/></li></ul></ul></ul></div><b>Original Signal</b><br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/Lu7rlq2kZz9dkcEuFvCsXA?a=479uxoN1RZXSLflTblGxxYVofuL7NalS7t9O0Yfy9vwa' id='DKTACApcX1M' alt=''></img></div>Problems with Choice a<br/>
+
+<br/>
+
+<div class="" style="" data-section-style='6'><ul id='DKTACATtGU9'><ul><ul><li id='DKTACA71rnu' class='' value='1'>Bootstrapped signal is way different than original signal and will lead to feeding biased information into the model which might lead to spurious findings
+
+<br/></li></ul><li id='DKTACAxSE9o' class='parent'>Choice 2:
+
+<br/></li><ul><li id='DKTACAa4kM3' class='parent'>Split every signal into equal sized window of time steps. For each window, generate features. Each window becomes a training or testing example in the dataset. What should be the size of the window
+
+<br/></li><ul><li id='DKTACArHXKs' class=''>About 400 examples from the raw data capture approximately 12 seconds of walking behavior. From eye balling the top few graphs - looks like activity repeats after every 3-4 seconds. We can start with a window of 150 time steps 
+
+<br/></li></ul></ul></ul></ul></div><h2 id='DKTACAgOsjo'>Feature Development</h2>
+
+1 For each of the x, y, z and magnitude components in a window, let’s capture the following information<br/>
+
+a. General characteristics: <b>Mean (mentioned in instruction), variance, min and max</b><br/>
+
+b. Number of  Fluctuations (how smoothly or jerkily someone walks ): Based on concept of <b>golden cross, </b>when short term moving average surpasses long term moving average. There is a spike on upward trend (used in stock markets )<br/>
+
+c. Autocorrelation features (graphs show high evidence of cyclicity) : <b>Max min, mean and variance of corelation </b>with lagged values of the components will give us a measure of how strong is the cyclic behavior<br/>
+
+d. <b>Avg gap between time values</b><br/>
+
+Total 9(features)*4(components) = 36 features for each window<br/>
+
+<h2 id='DKTACAY99DS'>ML Pipeline </h2>
+
+<br/>
+
+Raw Data → Extract windows of data → Extract features from each window → Preprocess features → Prepare Training &amp; test data → ML Model from train data → Evaluate Model → Post processing Insights<br/>
+
+<h2 id='DKTACAr52s7'>Preprocess features </h2>
+
+<h3 id='DKTACAqEQNX'>Normalization vs Standardization</h3>
+
+most of the features are normally distributed . So standardization is a safe bet <br/>
+
+<br/>
+
+Plots for some features<br/>
+
+<br/>
+
+<pre id='DKTACAXGGL2'>Plotting for column atcr_avg_x</pre>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/BT7rgYOBPt4lpmOzj-MhPA?a=ZbEaYo0fynp8sVZkXfV5dIJsyFVNUaUJRjRDzUqngmwa' id='DKTACAj1Spm' alt='' width='800' height='398'></img></div><pre id='DKTACA2UNnc'>Plotting for column atcr_avg_y</pre>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/A4B6y3lAUkDKr8WXLT-xVQ?a=vYXmrGGoP9pybRCQZiXMxw60apkaNhNKQ33YRpI154Ia' id='DKTACAcjX5A' alt='' width='800' height='398'></img></div><br/>
+
+<pre id='DKTACA5LzQ7'>Plotting for column atcr_min_x</pre>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/E_QycXNQV0VeDHEZlsOSpw?a=DVwTQuPaNMGEniNucaL8wr1Hxbo07ih2DerpW4aqh0oa' id='DKTACAXZOIz' alt='' width='800' height='398'></img></div><br/>
+
+Train and test examples distribution (class wise )<br/>
+
+<br/>
+
+<b>Train distribution</b><br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/ij7MaYGQ2M2VEH-2wgH-qg?a=ME6FDOytqE6ukxa1hafzuZPeOEoa3CnPn8EtQ77TXoEa' id='DKTACAjQ0eE' alt=''></img></div><br/>
+
+<b>Test Distribution</b><br/>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/k1vk0_stzMmeMMhIEcV5AQ?a=y6p8FVNKPZxVCPf1sJNkt7ZkPMZdlQSuUQaPWsYEczIa' id='DKTACAVOOi0' alt=''></img></div><br/>
+
+<br/>
+
+<h1 id='DKTACAWYJzy'>Modeling Results/Evaluation</h1>
+
+Did some experiments with Linear SVM. below are better results for GradientBoosting<br/>
+
+<br/>
+
+<b>Train Data Report</b><br/>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class='tall'><img src='https://quip.com/blob/DKTAAAMvHhu/C6WDIJV_C4D7mHFkpujs-g?a=1wMOpSzOKRIJZJTK9cOAZanxSbBb7SfgDTenNlWo2lAa' id='DKTACAkUgnw' alt=''></img></div><br/>
+
+<b>Test Data Report</b><br/>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class='tall'><img src='https://quip.com/blob/DKTAAAMvHhu/-jPhS9RTbqqqNZgAirZPDQ?a=QVaIeLenWalP2agyHYVTTevj2GKAz2Ajc82dG402dDwa' id='DKTACAq1IjM' alt=''></img></div><br/>
+
+Acceptable results for first iteration. Looks like the examples are overfitting<br/>
+
+<h3 id='DKTACAdHCw2'><b>Evaluation II</b></h3>
+
+<br/>
+
+Above was the efficacy of ML model - to evaluate the final system of identifying users, we should look at the following ratios<br/>
+
+<div class="" style="" data-section-style='6'><ul id='DKTACAN1kEO'><li id='DKTACA2eDOt' class='' value='1'>In biometric evaluation - metrics to focus are false acceptance rate and false rejection rate. We can also evaluate using these ratios
+
+<br/></li><li id='DKTACAkkA2w' class=''>Right now the evaluation metrics are for specific windows → If we want to identify a new incoming user signal we can use the same pipeline and take the mode predictions from all windows as the final prediction for the entire signal
+
+<br/></li></ul></div><br/>
+
+<h2 id='DKTACA6XpbS'>Post processing </h2>
+
+<br/>
+
+<div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/DSYxzQ9ZswqVpmWs2xw-Og?a=ohHr1lph0sGOXBabaCDv2yeZJg7gIup9RV4bCshT53Ua' id='DKTACAzqFJT' alt='' width='800' height='408'></img></div><br/>
+
+Average x-acceleration and Average y-acceleration are the top two features (specifically asked to include in instructions)<br/>
+
+<h2 id='DKTACAbjLQP'>How to reduce overfitting ?</h2>
+
+<div class="" style="" data-section-style='6'><ul id='DKTACAXhVPY'><li id='DKTACAPTy1X' class='' value='1'>Remove features correlated among themselves (same information from correlated features)
+
+<br/></li><li id='DKTACAeAyTI' class=''><span data-section-style='11' style='max-width:82%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/s0IM2tWAefr5dIT0iAJ2PA?a=VediA4CHOgZ746mbNE2oYFCW765xCR0HwKnkSnI8o6Aa' id='DKTACAeAyTI' alt='' width='662' height='632'></img></span></li></ul></div><div style="--indent0: 2" class="list-numbering-restart-at" data-section-style='6'><ul id='DKTACA1KqkX'><li id='DKTACADkOc0' class='parent' value='1'>Reduce features that are independent of  target variable (see couple of features with score close to zero → those features dont help much in determining the target class) 
+
+<br/></li><ul><li id='DKTACAk1pCt' class=''>This is similar to p values for classification
+
+<br/></li></ul></ul></div><div data-section-style='11' style='max-width:100%' class=''><img src='https://quip.com/blob/DKTAAAMvHhu/wIXi2XV7Y8eSkzdnT4zsSQ?a=QcEaa6Bno9SB8MaaolVgNa59gjOrWIIMj4spp6uYCMMa' id='DKTACAhN79C' alt='' width='800' height='228'></img></div><div class="list-numbering-restart-at" data-section-style='6' style="--indent0: 3"><ul id='DKTACAsS5wm'><li id='DKTACAikj1D' class='' value='1'>Increase the data (by shortening the window or taking overlapping windows or both)
+
+<br/></li><li id='DKTACATnNRh' class=''>Use other regularization techniques
+
+<br/></li></ul></div></body></html>
